@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '100vh',
     background: 'white',
+
   },
 });
 const MainBody = (props) => {

@@ -28,7 +28,14 @@ const Collection = ({ content }) => {
   return (
     <Card containerStyle={cardStyles}>
       <CardMedia
-        overlay={<CardTitle title={content.title} subtitle={content.subtitle} />}
+        overlay={
+          <CardTitle
+            title={content.title}
+            titleStyle={{ fontSize:'5vw' }}
+            subtitle={content.subtitle}
+            subtitleStyle={{ fontSize: '3vw' }}
+          />
+        }
       >
         <img src={content.img} alt="" />
       </CardMedia>
