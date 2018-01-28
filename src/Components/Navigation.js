@@ -11,6 +11,8 @@ const styles = StyleSheet.create({
   appBar: {
     background: 'white',
     height: '8vh',
+    position: 'fixed',
+    top: 0,
   },
   title: {
     textAlign: 'center',
@@ -28,7 +30,6 @@ class NavMobile extends React.PureComponent {
         <AppBar
           className={css(styles.appBar)}
           title={<div className={css(styles.title)}>Sevencherry</div>}
-          iconClassNameRight="muidocs-icon-navigation-expand-more"
           iconElementRight={<IconButton><ShoppingBasket /></IconButton>}
           onLeftIconButtonClick={() => { this.toggleDrawer(); }}
         />

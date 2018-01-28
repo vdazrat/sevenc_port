@@ -4,10 +4,16 @@ import autobind from 'autobind-decorator';
 import { StyleSheet, css } from 'aphrodite';
 import { Carousel, SView } from './Carousel';
 
-// This is the front page of the application, and may host
+// This is the front banner page of the application, and may host
 // Looks, Collections or other nodes.
 
 const styles = StyleSheet.create({
+  bannerContainer: {
+    position: 'fixed',
+    width: '100%',
+    top: '8vh',
+    height: '100vh',
+  },
   frontPageContainer: {
     height: '100%',
   },
@@ -37,30 +43,32 @@ class FrontPage extends React.PureComponent {
   }
   render() {
     return (
-      <Carousel>
-        {this.props.content.map((v) => {
-          return (
-            <SView>
-              <div
-                className={css(styles.frontPageContainer)}
-                style={
-                {
-                  background: `url(${v.img}) center center no-repeat`,
-                }}
-              >
-                <div className={css(styles.carouselContent)}>
-                  <div className={css(styles.carouselHeader)}>
-                    {v.header}
-                  </div>
-                  <div className={css(styles.carouselDesc)}>
-                    {v.description}
+      <div className={css(styles.bannerContainer)}>
+        <Carousel>
+          {this.props.content.map((v) => {
+            return (
+              <SView key={`banner__${v.id}`}>
+                <div
+                  className={css(styles.frontPageContainer)}
+                  style={
+                  {
+                    background: `url(${v.img}) center center no-repeat`,
+                  }}
+                >
+                  <div className={css(styles.carouselContent)}>
+                    <div className={css(styles.carouselHeader)}>
+                      {v.header}
+                    </div>
+                    <div className={css(styles.carouselDesc)}>
+                      {v.description}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </SView>
-          );
-        })}
-      </Carousel>
+              </SView>
+            );
+          })}
+        </Carousel>
+      </div>
     );
   }
 }
