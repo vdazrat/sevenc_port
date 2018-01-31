@@ -8,6 +8,7 @@ import Collections from './Components/Home/Collections';
 import Categories from './Components/Home/Categories';
 import Section from './Components/Home/Section';
 import MainBody from './Components/Home/MainBody';
+import Footer from './Components/Footer';
 
 const bannerContent = [
   {
@@ -95,6 +96,7 @@ const App = () => (
         <Section name="Categories">
           <Categories categories={categoriesContent} />
         </Section>
+        <Footer />
       </MainBody>
     </div>
   </MuiThemeProvider>
