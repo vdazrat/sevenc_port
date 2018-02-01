@@ -15,9 +15,9 @@ const styles = {
   },
 };
 
-class Categories extends React.PureComponent {
+class CardGrid extends React.PureComponent {
   static propTypes = {
-    categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+    content: PropTypes.arrayOf(PropTypes.object).isRequired,
   }
   render() {
     return (
@@ -28,7 +28,7 @@ class Categories extends React.PureComponent {
           padding={1}
           style={styles.gridList}
         >
-          {this.props.categories.map(category => {
+          {this.props.content.map(category => {
             return (
               <GridTile
                 key={`cat__${category.id}`}
@@ -51,4 +51,4 @@ class Categories extends React.PureComponent {
   }
 }
 
-export default autobind(Categories);
+export default autobind(CardGrid);
