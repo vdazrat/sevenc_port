@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 import { Card, CardMedia, CardTitle } from 'material-ui/Card';
 
-class Collections extends React.PureComponent {
+class CardRow extends React.PureComponent {
   static propTypes = {
-    collections: PropTypes.arrayOf(PropTypes.object).isRequired,
+    content: PropTypes.arrayOf(PropTypes.object).isRequired,
   }
   render() {
     return (
       <div>
         {
-          this.props.collections.map(v => {
+          this.props.content.map(v => {
             return <Collection content={v} key={`collection__${v.id}`} />;
           })
         }
@@ -46,4 +46,4 @@ Collection.propTypes = {
   content: PropTypes.object.isRequired,
 };
 
-export default autobind(Collections);
+export default autobind(CardRow);

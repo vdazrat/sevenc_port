@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 import { StyleSheet, css } from 'aphrodite';
-import { Carousel, SView } from './Carousel';
+import { Carousel, SView } from '../../Components/Banner';
 
 // This is the front banner page of the application, and may host
 // Looks, Collections or other nodes.
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 });
 
 
-class FrontPage extends React.PureComponent {
+class HomeBanner extends React.PureComponent {
   static propTypes = {
     content: PropTypes.arrayOf(PropTypes.shape({
       img: PropTypes.string,
@@ -74,4 +74,4 @@ class FrontPage extends React.PureComponent {
 }
 
 
-export default autobind(FrontPage);
+export default autobind(HomeBanner);
