@@ -8,9 +8,9 @@ node_js:
 env:
   - NODE_ENV=TEST
 script:
+  - npm run lint -v
   - npm run lint
   
 cache:
-  yarn: true
   directories:
     - node_modules
