@@ -8,4 +8,5 @@ import registerServiceWorker from './registerServiceWorker';
 useStrict(true);
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
 registerServiceWorker();
