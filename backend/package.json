@@ -1,0 +1,33 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend for sevenc",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --recursive src/**/__tests__/*.js",
+    "start": "node index.js",
+    "knex-init": "NODE_PATH=./src/db && cd $NODE_PATH && knex init",
+    "migrate:make": "NODE_PATH=./src//db && cd $NODE_PATH && knex --knexfile ./src/configs/knexfile.js migrate:make",
+    "migrate:test": "NODE_PATH=./src/db && cd $NODE_PATH && knex -V",
+    "migrate:latest": "MODE='latest' node ./src/db/scripts/migrate.js",
+    "migrate:rollback": "MODE='rollback' node ./src/db/scripts/migrate.js",
+    "migrate:version": "MODE='version' node ./src/db/scripts/migrate.js"
+  },
+  "author": "venu dasarathy",
+  "license": "ISC",
+  "dependencies": {
+    "bookshelf": "^0.13.3",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "knex": "^0.14.6",
+    "pg": "^7.4.1",
+    "ramda": "^0.25.0"
+  },
+  "devDependencies": {
+    "casual": "^1.5.19",
+    "chai": "^4.1.2",
+    "mocha": "^5.1.1",
+    "sinon": "^5.0.7"
+  }
+}

@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  db:
+    build: ./backend/db/image
+    image: sevenc-dev-db:latest
+    container_name: sevenc-dev-db
+    env_file: configs/.env
+    volumes:
+      - sevenc-dev-db:/var/lib/postgresql/data
+    ports:
+    - 5432:5432
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+
+volumes:
+  sevenc-dev-db:
+    driver: local
