@@ -1,16 +1,25 @@
 const { createTablesForSchemasWithKnex, dropTablesForSchemasWithKnex } = require('../utils');
 
-const userSchema = {
-	users(table) {
-		table.increments('id').primary();
-  		table.text('first_name').notNullable();
-  		table.text('last_name').notNullable();
-  		table.text('email').unique().notNullable();
-  		table.string('phone', 20).unique().notNullable();
-	},
-};
-
 const productSchema = {
+	// i think we need to create a product suite,or product_line and grant access to users to enitre lines.,
+	product_lines(table) {
+		table.increments('id').primary();
+		table.text('description');
+		table.string('name');
+		table.integer('resource_id').references('resources.id');
+	},
+	product_collections(table) {
+		table.increments('id').primary();
+		table.string('name').notNullable();
+		table.text('description');
+		table.boolean('isActive');
+		table.integer('created_by').references('sellers.id');
+		table.integer('product_line_id').references('product_lines.id').notNullable();
+	},
+	product_collections__products(table) {
+		table.integer('product_id').references('products.id');
+		table.integer('product_collection_id').references('product_collections.id');
+	},
 	products(table) {
 		table.increments('id').primary();
 		table.text('name').notNullable();
@@ -20,30 +29,23 @@ const productSchema = {
 		table.dateTime('available_at');
 		table.dateTime('updated_at');
 		table.integer('product_class_id').references('product_classes.id');
+		table.integer('product_line_id').references('product_lines.id').notNullable();
 	},
 	product_variants(table) {
 		table.increments('id').primary();
+		table.integer('product_id').references('products.id');
 		table.text('name').notNullable();
 		table.float('price_override');
 		table.float('weight_override');
 		table.integer('qty_available');
 		table.integer('qty_required'); // computed from orders
 	},
-	products__product_variants(table) {
-		table.increments('id').primary();
-		table.integer('product_id').references('products.id');
-		table.integer('product_variants_id').references('product_variants.id');
-	},
 	product_categories(table) {
 		table.increments('id').primary();
+		table.integer('product_id').references('products.id');
 		table.string('name');
 		table.string('description');
 		table.integer('parent_category_id').references('product_categories.id');
-	},
-	product__product_categories(table) {
-		table.increments('id').primary();
-		table.integer('product_id').references('products.id');
-		table.integer('product_category_id').references('product_categories.id');
 	},
 	product_classes(table) {
 		table.increments('id').primary();
@@ -72,7 +74,7 @@ exports.up = function(knex, Promise) {
 	const createTablesForSchemas = createTablesForSchemasWithKnex(knex);
 
   	return Promise.all(
-  		createTablesForSchemas([userSchema, productSchema])
+  		createTablesForSchemas([productSchema])
   	);
 };
 
@@ -80,7 +82,8 @@ exports.down = function(knex, Promise) {
 	const dropTablesForSchemas = dropTablesForSchemasWithKnex(knex);
 
   	return Promise.all(
-	  	dropTablesForSchemas([userSchema, productSchema])
+	  	dropTablesForSchemas([productSchema])
   	);
 };
+
 

@@ -7,10 +7,11 @@
     "test": "./node_modules/.bin/mocha --recursive src/**/__tests__/*.js",
     "start": "node index.js",
     "knex-init": "NODE_PATH=./src/db && cd $NODE_PATH && knex init",
-    "migrate:make": "NODE_PATH=./src//db && cd $NODE_PATH && knex --knexfile ./src/configs/knexfile.js migrate:make",
+    "migrate:make": "NODE_PATH=./src/db && cd $NODE_PATH && knex --knexfile ./configs/knexfile.js migrate:make",
     "migrate:test": "NODE_PATH=./src/db && cd $NODE_PATH && knex -V",
     "migrate:latest": "MODE='latest' node ./src/db/scripts/migrate.js",
     "migrate:rollback": "MODE='rollback' node ./src/db/scripts/migrate.js",
+    "seed:run":"node ./src/db/scripts/seed.js",
     "migrate:version": "MODE='version' node ./src/db/scripts/migrate.js"
   },
   "author": "venu dasarathy",
