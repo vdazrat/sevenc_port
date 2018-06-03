@@ -1,5 +1,12 @@
 const { createTablesForSchemasWithKnex, dropTablesForSchemasWithKnex } = require('../utils');
 
+const rbacSchema = {
+	system_roles(table) {
+		table.integer('id').primary().notNullable(); // should be seeded
+		table.string('description');
+	},
+};
+
 const userSchema = {
 	users(table) {
 		table.increments('id').primary();
@@ -11,6 +18,7 @@ const userSchema = {
 	sellers(table) {
 		table.increments('id').primary();
 		table.integer('user_id').references('users.id');
+		table.integer('role_id').references('system_roles.id').nullable();
 	},
 };
 
@@ -18,7 +26,7 @@ exports.up = function(knex, Promise) {
 	const createTablesForSchemas = createTablesForSchemasWithKnex(knex);
 
   	return Promise.all(
-  		createTablesForSchemas([userSchema])
+  		createTablesForSchemas([rbacSchema, userSchema])
   	);
 };
 
@@ -26,6 +34,6 @@ exports.down = function(knex, Promise) {
 	const dropTablesForSchemas = dropTablesForSchemasWithKnex(knex);
 
   	return Promise.all(
-	  	dropTablesForSchemas([userSchema])
+	  	dropTablesForSchemas([rbacSchema, userSchema])
   	);
 };

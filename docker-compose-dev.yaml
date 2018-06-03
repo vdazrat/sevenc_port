@@ -2,7 +2,7 @@ version: "3"
 
 services:
   db:
-    build: ./backend/db/image
+    build: ./backend/src/db/image
     image: sevenc-dev-db:latest
     container_name: sevenc-dev-db
     env_file: configs/.env
