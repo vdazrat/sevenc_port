@@ -17,7 +17,7 @@ const userSchema = {
 	},
 	sellers(table) {
 		table.increments('id').primary();
-		table.integer('user_id').references('users.id');
+		table.integer('user_id').references('users.id').notNullable();
 		table.integer('role_id').references('system_roles.id').nullable();
 	},
 };

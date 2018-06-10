@@ -3,6 +3,13 @@ const bookshelf = require('../../configs/bookshelf');
 const knex = bookshelf.knex;
 const ProductLine = require('./ProductLine');
 
+const perms = {
+	read: 0b00000010,
+	moderator: 0b00001111,
+	admin: 0b00011111,
+};
+
+
 class User extends bookshelf.Model {
 	get tableName() {
 		return 'sellers';
@@ -55,6 +62,18 @@ class User extends bookshelf.Model {
 			throw (new Error('Invalid: User does not have privilage to grant access to this resource.'));
 		}
 		return User.permission.grant(user, access, resource);
+	}
+
+	async makeContentReader(user, resource) {
+		return this.grantAccess(user, perms.read, resource);
+	}
+
+	async makeModerator(user, resource) {
+		return this.grantAccess(user, perms.moderator, resource);
+	}
+
+	async makeAdmin(user, resource) {
+		return this.grantAccess(user, perms.admin, resource);
 	}
 
 	async revokeAccess(user, resource) {
