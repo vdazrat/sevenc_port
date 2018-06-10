@@ -13,6 +13,9 @@ node_modules/
 .DS_Store
 .env
 
+# database template dump
+__dump__/
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

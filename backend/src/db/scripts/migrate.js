@@ -6,7 +6,6 @@ const env         = process.env.NODE_ENV;
 const mode		  = process.env.MODE;
 console.log(env);
 const knex        = require('knex')(config[env]);
-
 if (mode === 'latest') {
 	console.log('coming here');
 	knex.migrate.latest([config])

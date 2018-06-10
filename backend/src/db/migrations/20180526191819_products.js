@@ -6,19 +6,19 @@ const productSchema = {
 		table.increments('id').primary();
 		table.text('description');
 		table.string('name');
-		table.integer('resource_id').references('resources.id');
+		table.integer('resource_id').references('resources.id').notNullable();
 	},
 	product_collections(table) {
 		table.increments('id').primary();
-		table.string('name').notNullable();
+		table.string('name').notNullable().unique();
 		table.text('description');
 		table.boolean('isActive');
-		table.integer('created_by').references('sellers.id');
+		table.integer('created_by').references('sellers.id').notNullable();
 		table.integer('product_line_id').references('product_lines.id').notNullable();
 	},
 	product_collections__products(table) {
-		table.integer('product_id').references('products.id');
-		table.integer('product_collection_id').references('product_collections.id');
+		table.integer('product_id').references('products.id').notNullable();
+		table.integer('product_collection_id').references('product_collections.id').notNullable();
 	},
 	products(table) {
 		table.increments('id').primary();
@@ -28,7 +28,7 @@ const productSchema = {
 		table.float('weight');
 		table.dateTime('available_at');
 		table.dateTime('updated_at');
-		table.integer('product_class_id').references('product_classes.id');
+		table.integer('product_class_id').references('product_classes.id').notNullable();
 		table.integer('product_line_id').references('product_lines.id').notNullable();
 	},
 	product_variants(table) {
@@ -42,10 +42,10 @@ const productSchema = {
 	},
 	product_categories(table) {
 		table.increments('id').primary();
-		table.integer('product_id').references('products.id');
+		table.integer('product_id').references('products.id').notNullable();
 		table.string('name');
 		table.string('description');
-		table.integer('parent_category_id').references('product_categories.id');
+		table.integer('parent_category_id').references('product_categories.id').notNullable();
 	},
 	product_classes(table) {
 		table.increments('id').primary();
@@ -56,13 +56,13 @@ const productSchema = {
 		table.float('cost_price').notNullable(); // useful for showing discounts
 		table.float('selling_price').notNullable();
 		table.text('sku').notNullable();
-		table.integer('product_variant_id').references('product_variants.id');
-		table.integer('product_location_id').references('product_locations.id');
+		table.integer('product_variant_id').references('product_variants.id').notNullable();
+		table.integer('product_location_id').references('product_locations.id').notNullable();
 	},
 	products_sold(table) {
 		table.increments('id').primary();
 		table.float('price').notNullable();
-		table.integer('product_stock_id').references('product_stocks.id');
+		table.integer('product_stock_id').references('product_stocks.id').notNullable();
 	},
 	product_locations(table) {
 		table.increments('id').primary();

@@ -84,7 +84,7 @@ async function revoke() {
 async function createProductLine(name, description) {
 	const user = await Seller.forge({ user_id: 4 }).fetch();
 	try{
-		const pl = await user.createProductLine(name, description);
+		const pl = await user.createProductLine({ name, description });
 		console.log('successfully craeted product line ', pl);
 	} catch(e) {
 		console.log('could not product line ', e);

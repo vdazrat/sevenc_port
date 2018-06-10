@@ -11,8 +11,11 @@
     "migrate:test": "NODE_PATH=./src/db && cd $NODE_PATH && knex -V",
     "migrate:latest": "MODE='latest' node ./src/db/scripts/migrate.js",
     "migrate:rollback": "MODE='rollback' node ./src/db/scripts/migrate.js",
-    "seed:run":"node ./src/db/scripts/seed.js",
-    "migrate:version": "MODE='version' node ./src/db/scripts/migrate.js"
+    "seed:run": "node ./src/db/scripts/seed.js",
+    "migrate:version": "MODE='version' node ./src/db/scripts/migrate.js",
+    "dumprun": "node ./src/db/scripts/dumprun.js",
+    "flushdb": "node ./src/db/scripts/flushdb.js",
+    "refreshdb": "npm run migrate:latest && npm run seed:run && npm run seed:run -- dump && npm run dumprun"
   },
   "author": "venu dasarathy",
   "license": "ISC",
@@ -29,6 +32,7 @@
     "casual": "^1.5.19",
     "chai": "^4.1.2",
     "mocha": "^5.1.1",
+    "shelljs": "^0.8.2",
     "sinon": "^5.0.7"
   }
 }
